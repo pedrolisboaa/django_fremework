@@ -14,7 +14,15 @@
         </ul>
     </nav>
 
-    <h1>Olá eu sou o contato</h1>
+    <h1>Meus contatos </h1>
+    <h2>Listando meus Clientes</h2>
+    {% for cliente in clientes %}
+        <p>
+            <a href="{% url 'cliente' cliente.id %}">{{cliente.nome}} {{cliente.sobrenome}} </a>
+           : 
+            <a href="mailto:{{cliente.email}}">{{cliente.email}}</a> 
+        </p>
+    {% endfor %}    
     
 </body>
 </html>

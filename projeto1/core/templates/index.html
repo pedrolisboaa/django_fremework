@@ -14,10 +14,28 @@
         </ul>
     </nav>
 
-    <h1>Olá eu sou a index</h1>
+    <h1>Index</h1>
+    <h2>Listando meus produtos do estoque</h2>
 
-    <h2>{{chave}}</h2>
-    <h2>{{nome}}</h2>
+   <table>
+        <tr>
+            <th>Produto</th>
+            <th>Preço</th>
+            <th>Quantidade em estoque</th>
+            <th>Valor em Produto</th>
+        </tr>
+        {% for produto in produtos %}
+        <tr>
+            <th>{{produto.nome}}</th>
+            <th>{{produto.preco}}</th>
+            <th>{{produto.estoque}}</th>
+            <th>{{produto.calcular_valor_produtos}}</th>
+        </tr>
+        {% endfor %}
+
+   </table>
+   
+    
     
 </body>
 </html>
