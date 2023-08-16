@@ -17,9 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# Isso aqui é pagina de ERRO IR EM URLS do principal, viws e no template
+from django.conf.urls import handler404
+from core import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls'))
 ]
 
+
+handler404 = views.error404
 

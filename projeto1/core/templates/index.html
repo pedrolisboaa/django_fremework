@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+
+{% load static %}
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
@@ -15,6 +19,7 @@
     </nav>
 
     <h1>Index</h1>
+    <img src="{% static 'images/estoque.png' %}" alt="">
     <h2>Listando meus produtos do estoque</h2>
 
    <table>
@@ -27,15 +32,15 @@
         {% for produto in produtos %}
         <tr>
             <th>{{produto.nome}}</th>
-            <th>{{produto.preco}}</th>
-            <th>{{produto.estoque}}</th>
-            <th>{{produto.calcular_valor_produtos}}</th>
+            <th id="preco">{{produto.preco}}</th>
+            <th id="estoque">{{produto.estoque}}</th>
+            <th id="valor"></th>
         </tr>
         {% endfor %}
 
    </table>
    
     
-    
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
