@@ -11,13 +11,16 @@ def contato(request):
 
     if str(request.method == 'POST'):
         if formulario.is_valid():
+            formulario.enviar_email()
+            
+            """
             nome = formulario.cleaned_data['nome']
             email = formulario.cleaned_data['email']
             assunto = formulario.cleaned_data['assunto']
             mensagem = formulario.cleaned_data['mensagem']
 
             print(f'{nome} {email} {assunto} {mensagem}')
-
+            """
             messages.success(request, 'Enviado com sucesso!')    
             formulario = ContatoForm()
         else:
