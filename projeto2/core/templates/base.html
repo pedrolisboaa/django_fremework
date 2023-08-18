@@ -1,4 +1,8 @@
+{% load bootstrap5 %}
 {% load static %}
+
+
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -7,6 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block titulo %}{% endblock titulo %}</title>
 
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>

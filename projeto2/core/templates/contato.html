@@ -1,9 +1,24 @@
 {% extends 'base.html' %}
+{% load bootstrap5 %}
+
 
 {% block titulo %}
     |CONTATO|
 {% endblock titulo %}
 
 {% block conteudo %}
-    Eu sou o contato
+
+    <div class='container'>
+        <h1>Contato</h1>
+        {% bootstrap_messages %}
+
+        <form action="{% url 'contato' %}" method="post" class="form" autocomplete="off">
+            {% csrf_token %}
+            {% bootstrap_form formulario %}
+            {%  buttons %}
+                <button type="submit" class="btn btn-primary" >Enviar Mensagem</button>
+            {% endbuttons %}
+        </form>
+    </div>
+
 {% endblock conteudo %}
