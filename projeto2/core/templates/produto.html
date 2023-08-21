@@ -1,9 +1,23 @@
 {% extends 'base.html' %}
-
+{% load bootstrap5 %}
 {% block titulo %}
     |PRODUTO|
 {% endblock titulo %}
 
 {% block conteudo %}
-    Eu sou o produto
+    
+    <div class="container">
+        <h1>Favor inserir o Produto</h1>
+        {% bootstrap_messages %}
+
+        <form action="{% url 'produto' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% bootstrap_form formulario %}
+            {%  buttons %}
+                <button type="submit" class="btn btn-primary" >Enviar Mensagem</button>
+            {% endbuttons %}
+        </form>
+    </div>
+
 {% endblock conteudo %}

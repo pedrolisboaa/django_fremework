@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
-from .forms import ContatoForm
+from .forms import ContatoForm, ProdutoModelForm
 
 # Create your views here.
 def index(request):
@@ -9,7 +9,7 @@ def index(request):
 def contato(request):
     formulario = ContatoForm(request.POST or None)
 
-    if str(request.method == 'POST'):
+    if request.method == 'POST':
         if formulario.is_valid():
             formulario.enviar_email()
             
@@ -25,6 +25,8 @@ def contato(request):
             formulario = ContatoForm()
         else:
             messages.error(request, 'Erro ao enviar.')
+    else:
+        formulario = ContatoForm()
 
     contexto = {
         'formulario': formulario,
@@ -32,4 +34,26 @@ def contato(request):
     return render(request, 'contato.html', contexto)
 
 def produto(request):
-    return render(request, 'produto.html')
+
+    if request.method == 'POST':
+        # Aqui vai receber os dados + imagens, por isso o request.FILES
+        formulario = ProdutoModelForm(request.POST, request.FILES)
+        if formulario.is_valid():
+            produto = formulario.save(commit=False)
+
+            print(f'Nome - {produto.nome}')
+            print(f'Preco - {produto.preco}')
+            print(f'Estoque - {produto.estoque}')
+            print(f'Imagem - {produto.imagem}')
+
+            messages.success(request, 'Produtos enviados com sucesso.')
+            formulario = ProdutoModelForm()
+        else:
+            messages.error(request, 'Erro ao salvar o produtpo')
+    else:
+        formulario = ProdutoModelForm()
+    
+    context = {
+        'formulario': formulario
+    }
+    return render(request, 'produto.html', context)
