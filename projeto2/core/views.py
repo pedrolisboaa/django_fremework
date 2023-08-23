@@ -1,10 +1,18 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.shortcuts import redirect
+
+# Do forms eu uso para criar os formulários
 from .forms import ContatoForm, ProdutoModelForm
+# Do models para apresentar os dados
+from .models import Produto
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    conteudo = {
+        'produtos': Produto.objects.all()
+    }
+    return render(request, 'index.html', conteudo)
 
 def contato(request):
     formulario = ContatoForm(request.POST or None)
@@ -34,26 +42,32 @@ def contato(request):
     return render(request, 'contato.html', contexto)
 
 def produto(request):
+    if str(request.user) != 'AnonymousUser':
+        if request.method == 'POST':
+            # Aqui vai receber os dados + imagens, por isso o request.FILES
+            formulario = ProdutoModelForm(request.POST, request.FILES)
+            if formulario.is_valid():
 
-    if request.method == 'POST':
-        # Aqui vai receber os dados + imagens, por isso o request.FILES
-        formulario = ProdutoModelForm(request.POST, request.FILES)
-        if formulario.is_valid():
-            produto = formulario.save(commit=False)
+                formulario.save()
+                produto = formulario.save(commit=False)
 
-            print(f'Nome - {produto.nome}')
-            print(f'Preco - {produto.preco}')
-            print(f'Estoque - {produto.estoque}')
-            print(f'Imagem - {produto.imagem}')
-
-            messages.success(request, 'Produtos enviados com sucesso.')
-            formulario = ProdutoModelForm()
+                """
+                print(f'Nome - {produto.nome}')
+                print(f'Preco - {produto.preco}')
+                print(f'Estoque - {produto.estoque}')
+                print(f'Imagem - {produto.imagem}')
+                """
+                messages.success(request, 'Produtos enviados com sucesso.')
+                formulario = ProdutoModelForm()
+            else:
+                messages.error(request, 'Erro ao salvar o produtpo')
         else:
-            messages.error(request, 'Erro ao salvar o produtpo')
-    else:
-        formulario = ProdutoModelForm()
+            formulario = ProdutoModelForm()
     
-    context = {
-        'formulario': formulario
-    }
+        context = {
+            'formulario': formulario
+        }
+    else:
+        return redirect('index')
+
     return render(request, 'produto.html', context)
