@@ -6,40 +6,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscardo de Cupons</title>
-
     <link rel="shortcut icon" href="{% static 'images/favicon-32x32.png' %}" type="image/x-icon">
-
     <!--FONTES-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Asap:wght@300;400;900&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
-
-
     <!--CSS-->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-    
 </head>
 <body>
 
     <header class="cabecalho">
-
-        <img src="{% static 'images/logo_campanha.png' %}" alt="">
-
+        <a href="{% url 'index' %}"><img src="{% static 'images/logo_campanha.png' %}" alt=""></a>  
     </header>
 
-    <main class="conteudo_pricipal">
+    <main class="conteudo_principal">
 
-        <form action="">
-            aqui vai vim as coisas
+        <form action="{% url 'index' %}" method="GET">
+            <input type="text" name="cpf" id="btn-cpf" placeholder="Digite o CPF">
+            <input type="submit" value="Buscar Cupons">
         </form>
-
+        <table>
+            <tr>
+                <td>Nº de Cupom</td>
+            </tr>
+            {% for cumpom in cupons  %}
+                <tr>
+                    <td>{{cumpom.numero_cupom}}</td>
+                </tr>
+            {% endfor %}
+            
+        </table>
     </main>
     <foote class="rodape">
         <p>&copy; Sicoob Credbrasília. Todos os direitos reservados.</p>
     </footer>
 
-
-    
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

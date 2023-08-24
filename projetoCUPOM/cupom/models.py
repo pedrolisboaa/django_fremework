@@ -2,8 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Base(models.Model):
-    criado = models.DateField('Data de Criação',  auto_now_add=True)
-    modificado = models.DateField('Data de modificação', auto_now=True)
+    criado = models.DateTimeField('Data de Criação',  auto_now_add=True)
+    modificado = models.DateTimeField('Data de modificação', auto_now=True)
     
     class Meta:
         abstract = True
