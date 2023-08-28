@@ -16,31 +16,34 @@
 </head>
 <body>
 
-    <header class="cabecalho">
-        <a href="{% url 'index' %}"><img src="{% static 'images/logo_campanha.png' %}" alt=""></a>  
-    </header>
+    <div class="container-1">
+        <div class="container-1__interno">
+            <img src="{% static 'images/logo_campanha.png' %}" alt="">
+            <h1>Campanha de Capital Colaboradores</h1>
+        </div>
+    </div>
 
-    <main class="conteudo_principal">
+    <div class="container-2">
+        <div class="container-2__interno">
 
-        <form action="{% url 'index' %}" method="GET">
-            <input type="text" name="cpf" id="btn-cpf" placeholder="Digite o CPF">
-            <input type="submit" value="Buscar Cupons">
-        </form>
-        <table>
-            <tr>
-                <td>Nº de Cupom</td>
-            </tr>
-            {% for cumpom in cupons  %}
+            <p>Informe o CPF:</p>
+            <form action="{% url 'index' %}" method="GET">
+                <input type="text" name="cpf" id="btn-cpf" placeholder="Digite o CPF">
+                <input type="submit" value="Buscar Cupons">
+            </form>
+            <table>
                 <tr>
-                    <td>{{cumpom.numero_cupom}}</td>
+                    <td>Nº de Cupom</td>
                 </tr>
-            {% endfor %}
-            
-        </table>
-    </main>
-    <foote class="rodape">
-        <p>&copy; Sicoob Credbrasília. Todos os direitos reservados.</p>
-    </footer>
+                {% for cumpom in cupons  %}
+                    <tr>
+                        <td>{{cumpom.numero_cupom}}</td>
+                    </tr>
+                {% endfor %}
+                
+            </table>
+        </div>
+    </div>
 
     <script src="{% static 'js/script.js' %}"></script>
 </body>
