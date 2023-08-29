@@ -25,12 +25,19 @@ img {
 
 input{
     display: block;
+    width: 120%;
     margin: 10px 0 10px 0;
     width: 100%;
+    border-radius: 15px;
+    padding: 10px;
 }
 
 p{
     text-align: left;
+}
+
+table{
+    margin: 0 auto;
 }
 
 .container-1 {
@@ -62,6 +69,13 @@ p{
     text-align: center;
     padding: 20px;
     color: var(--branco);
+}
+
+#btn-buscar{
+    background-color: #C9D200;
+    text-transform: uppercase;
+    color: white;
+    font-weight: bolder;
 }
 
 /* Adicione regras de mídia para tornar o layout responsivo */

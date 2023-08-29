@@ -28,9 +28,10 @@
 
             <p>Informe o CPF:</p>
             <form action="{% url 'index' %}" method="GET">
-                <input type="text" name="cpf" id="btn-cpf" placeholder="Digite o CPF">
-                <input type="submit" value="Buscar Cupons">
+                <input type="text" name="cpf" id="input-cpf" placeholder="Digite o CPF">
+                <input type="submit" value="Buscar Cupons" id="btn-buscar">
             </form>
+            
             <table>
                 <tr>
                     <td>Nº de Cupom</td>
