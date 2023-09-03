@@ -1,8 +1,15 @@
 from django.shortcuts import render
+from .models import Servico, Time 
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+
+    conteudo = {
+        'servico': Servico.objects.all(),
+        'time' : Time.objects.all(),
+    }
+
+    return render(request, 'index.html', conteudo)
 
 
 # ERROS
